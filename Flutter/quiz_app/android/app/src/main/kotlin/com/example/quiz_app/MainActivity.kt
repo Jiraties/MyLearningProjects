@@ -1,4 +1,4 @@
-package jiratchutrakul.com.i_am_rich
+package com.example.quiz_app
 
 import io.flutter.embedding.android.FlutterActivity
 
