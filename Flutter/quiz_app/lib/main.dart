@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 import "package:flutter/material.dart";
 
 // void main() {
@@ -7,6 +8,13 @@ import "package:flutter/material.dart";
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    questionIndex = questionIndex + 1;
+    print(questionIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     var questions = [
@@ -19,21 +27,19 @@ class MyApp extends StatelessWidget {
           title: Text("Quiz App"),
         ),
         body: Column(
-          children: const [
-            Text("The question!"),
+          children: [
+            Text(questions[questionIndex]),
             RaisedButton(
-                child: Text("Answer 1"),
-                onPressed: null,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                )),
+              child: Text("Answer 1"),
+              onPressed: answerQuestion,
+            ),
             RaisedButton(
               child: Text("Answer 2"),
-              onPressed: null,
+              onPressed: () => print("Answer 2 chosen"),
             ),
             RaisedButton(
               child: Text("Answer 3"),
-              onPressed: null,
+              onPressed: () => {print("Answer 3 chosen")},
             ),
           ],
         ),
