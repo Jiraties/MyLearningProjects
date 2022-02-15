@@ -1,27 +1,26 @@
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
-import classes from './AuthForm.module.css';
+import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
-  const emailInputRef = useRef()
-  const passwordInputRef = useRef()
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
+    setIsLogin(prevState => !prevState);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = event => {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current.value
-    const enteredPassword = passwordInputRef.current.value
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
 
     // optional: Add validation
 
     if (isLogin) {
-
     } else {
       fetch(
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyC5iFgFRqbD6xpbBCoTI0eAwwnd7whlcbc",
@@ -31,19 +30,22 @@ const AuthForm = () => {
             email: enteredEmail,
             pasword: enteredPassword,
             returnSecureToken: true,
-            token: "HELLO!"
+            token: "HELLO!",
           }),
           header: {
-            "Content-type": "application.json"
-          }
+            "Content-type": "application.json",
+          },
         }
       ).then(res => {
         if (res.ok) {
           // ...
         } else {
           return res.json().then(data => {
-            // show an error modal
-            console.log(data)
+            let errorMessage = data.error.message;
+            if (data && data.error && data.error.message) {
+              errorMessage = data.error.message;
+            }
+            alert(errorMessage);
           });
         }
       });
@@ -52,24 +54,28 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
-      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor='email'>Your Email</label>
-          <input ref={emailInputRef} type='email' id='email' required />
+          <label htmlFor="email">Your Email</label>
+          <input ref={emailInputRef} type="email" id="email" required />
         </div>
         <div className={classes.control}>
-          <label htmlFor='password'>Your Password</label>
-          <input ref={passwordInputRef} type='password' id='password' required />
+          <label htmlFor="password">Your Password</label>
+          <input
+            ref={passwordInputRef}
+            type="password"
+            id="password"
+            required
+          />
         </div>
         <div className={classes.actions}>
-          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+          <button>{isLogin ? "Login" : "Create Account"}</button>
           <button
-            type='button'
+            type="button"
             className={classes.toggle}
-            onClick={switchAuthModeHandler}
-          >
-            {isLogin ? 'Create new account' : 'Login with existing account'}
+            onClick={switchAuthModeHandler}>
+            {isLogin ? "Create new account" : "Login with existing account"}
           </button>
         </div>
       </form>

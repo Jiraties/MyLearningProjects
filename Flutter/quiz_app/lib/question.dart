@@ -12,16 +12,9 @@ class Question extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(11),
-          topRight: Radius.circular(11),
-        ),
-        color: Colors.blue[300],
-      ),
       child: Text(
         questionText,
-        style: TextStyle(fontSize: 28),
+        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );

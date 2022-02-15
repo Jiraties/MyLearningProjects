@@ -3,19 +3,20 @@ import "package:flutter/material.dart";
 class Answer extends StatelessWidget {
   final VoidCallback selectHandler;
   final String answerText;
-  
+
   Answer(this.selectHandler, String this.answerText);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
-        child: Text(answerText),
-        onPressed: selectHandler,
-      ),
-    );
+        width: double.infinity,
+        child: FractionallySizedBox(
+          widthFactor: .85,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(primary: Colors.blue),
+            onPressed: selectHandler,
+            child: Text(answerText),
+          ),
+        ));
   }
 }
