@@ -1,1 +1,0 @@
-anotherVariable = 12
